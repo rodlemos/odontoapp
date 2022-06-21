@@ -4,7 +4,6 @@ import { useTheme } from "styled-components/native";
 import { Platform } from "react-native";
 import { MaterialCommunityIcons, Ionicons, Feather } from "@expo/vector-icons";
 import { Home } from "../screens/Home";
-import { Agenda } from "../screens/Agenda";
 
 export function AppTabRoutes() {
   const { colors } = useTheme();
@@ -31,7 +30,7 @@ export function AppTabRoutes() {
     >
       <Screen
         name="calendar"
-        component={Agenda}
+        component={Home}
         options={{
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons

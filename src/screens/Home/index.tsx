@@ -1,31 +1,34 @@
-import React from "react";
-import { FlatList } from "react-native-gesture-handler";
 import { AntDesign } from "@expo/vector-icons";
+import { getDate } from "date-fns";
 import { StatusBar } from "expo-status-bar";
+import React, { useEffect, useState } from "react";
+import { FlatList } from "react-native-gesture-handler";
 import { AppointmentCard } from "../../components/AppointmentCard";
 import { DateCard } from "../../components/DateCard";
+import { getDayName, getDayDate, getWeekDays } from "../../utils/getWeekDay";
 import {
-  Container,
-  Header,
   Avatar,
+  Container,
   Greeting,
   GreetingContent,
   GreetingDate,
   GreetingText,
+  Header,
   WeekdaysMenu,
 } from "./styles";
-
-const data = [
-  { id: 1, number: "6", title: "Seg" },
-  { id: 2, number: "7", title: "Ter" },
-  { id: 3, number: "8", title: "Qua" },
-  { id: 4, number: "9", title: "Qui" },
-  { id: 5, number: "10", title: "Sex" },
-  { id: 6, number: "11", title: "Sab" },
-  { id: 7, number: "12", title: "Dom" },
-];
+import { appointments } from "../../utils/fakeData";
 
 export function Home() {
+  const [today, setToday] = useState("");
+  const [todayName, setTodayName] = useState("");
+  const [weekDays, setWeekDays] = useState([]);
+
+  useEffect(() => {
+    setToday(getDayDate(new Date()));
+    setTodayName(getDayName(new Date(), true));
+    setWeekDays(getWeekDays());
+  }, []);
+
   return (
     <Container>
       <StatusBar style="dark" />
@@ -33,7 +36,7 @@ export function Home() {
         <Greeting>
           <Avatar source={{ uri: "https://github.com/rodlemos.png" }} />
           <GreetingContent>
-            <GreetingDate>Sexta-feira,10/06/2022</GreetingDate>
+            <GreetingDate>{`${todayName}, ${today}`}</GreetingDate>
             <GreetingText>Olá, Rodrigo.</GreetingText>
           </GreetingContent>
         </Greeting>
@@ -42,20 +45,32 @@ export function Home() {
       </Header>
 
       <WeekdaysMenu>
-        {data.map((item) => (
+        {weekDays.map((item) => (
           <DateCard
-            key={item.id}
-            number={item.number}
-            title={item.title}
-            active={item.id === 2}
+            key={item}
+            number={String(getDate(item))}
+            title={getDayName(item)}
+            active={getDayDate(item) === today}
+            onPress={() => {}}
           />
         ))}
       </WeekdaysMenu>
 
       <FlatList
-        data={[1, 2, 3, 4, 5, 6]}
-        renderItem={({ item }) => <AppointmentCard active={item === 1} />}
+        data={appointments}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <AppointmentCard
+            date={item.date}
+            hour={item.hour}
+            patient={item.patient}
+            avatar={item.avatar}
+            procedure={item.procedure}
+            active={item.id === "1"}
+          />
+        )}
         style={{ marginTop: 20 }}
+        contentContainerStyle={{ paddingBottom: 90 }}
       />
     </Container>
   );
