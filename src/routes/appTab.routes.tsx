@@ -43,8 +43,8 @@ export function AppTabRoutes() {
         }}
       />
       <Screen
-        name="Patient"
-        component={Patient}
+        name="Profile"
+        component={Home}
         options={{
           tabBarIcon: ({ color }) => (
             <Feather name="users" size={40} color={color} />

@@ -3,9 +3,10 @@ import { getDate } from "date-fns";
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
 import { FlatList } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
 import { AppointmentCard } from "../../components/AppointmentCard";
 import { DateCard } from "../../components/DateCard";
-import { getDayName, getDayDate, getWeekDays } from "../../utils/getWeekDay";
+import { getDayName, getDayDate, getWeekDays } from "../../utils/date-fns";
 import {
   Avatar,
   Container,
@@ -24,8 +25,15 @@ export function Home() {
   const [weekDays, setWeekDays] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
 
+  const { navigate } = useNavigation();
+
   function handleDaySelect(date: Date) {
     setSelectedDate(getDayDate(date));
+  }
+
+  function handleOpenAppointment(appointment) {
+    navigate("Patient", { appointment });
+    // console.log(appointment);
   }
 
   useEffect(() => {
@@ -33,6 +41,7 @@ export function Home() {
     setTodayName(getDayName(new Date(), true));
     setWeekDays(getWeekDays());
     setSelectedDate(today);
+    console.log(appointments);
   }, [today]);
 
   return (
@@ -68,12 +77,11 @@ export function Home() {
         renderItem={({ item }) =>
           getDayDate(item.date) === selectedDate && (
             <AppointmentCard
-              date={item.date}
               hour={item.hour}
               patient={item.patient}
-              avatar={item.avatar}
               procedure={item.procedure}
               active={item.id === "1"}
+              onPress={() => handleOpenAppointment(item)}
             />
           )
         }

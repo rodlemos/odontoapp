@@ -1,28 +1,27 @@
 import React from "react";
-import { Container, Details, Hour, Patient, Photo, Procedure } from "./styles";
+import { RectButtonProps } from "react-native-gesture-handler";
+import { Container, Details, Hour, Name, Procedure } from "./styles";
 
-type AppointmentCardProps = {
-  date: Date;
+type AppointmentCardProps = RectButtonProps & {
   hour: string;
   patient: string;
-  avatar?: string;
   procedure: string;
   active?: boolean;
 };
 
 export function AppointmentCard({
-  date,
   hour,
   patient,
   procedure,
   active = false,
+  ...rest
 }: AppointmentCardProps) {
   return (
-    <Container active={active}>
+    <Container active={active} {...rest}>
       <Hour>{hour}</Hour>
 
       <Details>
-        <Patient active={active}>{patient}</Patient>
+        <Name active={active}>{patient}</Name>
         <Procedure active={active}>{procedure}</Procedure>
       </Details>
     </Container>

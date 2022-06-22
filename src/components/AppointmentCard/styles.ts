@@ -33,7 +33,7 @@ export const Details = styled.View`
   margin-left: 20px;
 `;
 
-export const Patient = styled.Text<Props>`
+export const Name = styled.Text<Props>`
   margin-top: 5px;
   font-size: 22px;
   font-family: ${({ theme }) => theme.fonts.bold};

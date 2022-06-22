@@ -1,4 +1,5 @@
 import { Feather } from "@expo/vector-icons";
+import { useRoute } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { BorderlessButton, FlatList } from "react-native-gesture-handler";
@@ -24,6 +25,10 @@ import {
 
 export function Patient() {
   const { colors } = useTheme();
+  const route = useRoute();
+  const { appointment } = route.params;
+  console.log(appointment);
+
   return (
     <Container>
       <StatusBar style="light" />
@@ -40,7 +45,7 @@ export function Patient() {
         </Buttons>
 
         <PatientInfo>
-          <Name>Angela Moraes</Name>
+          <Name>{appointment.patient}</Name>
           <Age>26 anos</Age>
         </PatientInfo>
       </Header>
