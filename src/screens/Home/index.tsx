@@ -22,12 +22,18 @@ export function Home() {
   const [today, setToday] = useState("");
   const [todayName, setTodayName] = useState("");
   const [weekDays, setWeekDays] = useState([]);
+  const [selectedDate, setSelectedDate] = useState("");
+
+  function handleDaySelect(date: Date) {
+    setSelectedDate(getDayDate(date));
+  }
 
   useEffect(() => {
     setToday(getDayDate(new Date()));
     setTodayName(getDayName(new Date(), true));
     setWeekDays(getWeekDays());
-  }, []);
+    setSelectedDate(today);
+  }, [today]);
 
   return (
     <Container>
@@ -50,8 +56,8 @@ export function Home() {
             key={item}
             number={String(getDate(item))}
             title={getDayName(item)}
-            active={getDayDate(item) === today}
-            onPress={() => {}}
+            active={getDayDate(item) === selectedDate}
+            onPress={() => handleDaySelect(item)}
           />
         ))}
       </WeekdaysMenu>
@@ -59,16 +65,18 @@ export function Home() {
       <FlatList
         data={appointments}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <AppointmentCard
-            date={item.date}
-            hour={item.hour}
-            patient={item.patient}
-            avatar={item.avatar}
-            procedure={item.procedure}
-            active={item.id === "1"}
-          />
-        )}
+        renderItem={({ item }) =>
+          getDayDate(item.date) === selectedDate && (
+            <AppointmentCard
+              date={item.date}
+              hour={item.hour}
+              patient={item.patient}
+              avatar={item.avatar}
+              procedure={item.procedure}
+              active={item.id === "1"}
+            />
+          )
+        }
         style={{ marginTop: 20 }}
         contentContainerStyle={{ paddingBottom: 90 }}
       />

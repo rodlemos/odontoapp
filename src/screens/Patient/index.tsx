@@ -6,6 +6,7 @@ import { useTheme } from "styled-components/native";
 import { BackButton } from "../../components/BackButton";
 import { HistoryItem } from "../../components/HistoryItem";
 import { Separator } from "../../components/Separator";
+import { history } from "../../utils/fakeData";
 import {
   Age,
   Buttons,
@@ -17,48 +18,14 @@ import {
   NextAppointment,
   PatientData,
   PatientInfo,
-  Photo,
   Summary,
   Title,
 } from "./styles";
 
-const data = [
-  {
-    id: "1",
-    date: "12/06/2021",
-    procedure: "Cirurgia",
-  },
-  {
-    id: "2",
-    date: "27/08/2021",
-    procedure: "Limpeza",
-  },
-  {
-    id: "3",
-    date: "06/09/2021",
-    procedure: "Clareamento",
-  },
-  {
-    id: "4",
-    date: "13/09/2021",
-    procedure: "Clareamento",
-  },
-  {
-    id: "5",
-    date: "24/09/2021",
-    procedure: "Clareamento",
-  },
-  {
-    id: "6",
-    date: "15/03/2022",
-    procedure: "Limpeza",
-  },
-];
-
 export function Patient() {
   const { colors } = useTheme();
   return (
-    <Container nestedScrollEnabled>
+    <Container>
       <StatusBar style="light" />
       <Header>
         <Buttons>
@@ -73,11 +40,6 @@ export function Patient() {
         </Buttons>
 
         <PatientInfo>
-          <Photo
-            source={{
-              uri: "https://image.shutterstock.com/mosaic_250/2780032/1606121245/stock-photo-happy-young-indian-woman-blogger-applicant-teacher-sit-at-home-office-look-at-camera-doing-online-1606121245.jpg",
-            }}
-          />
           <Name>Angela Moraes</Name>
           <Age>26 anos</Age>
         </PatientInfo>
@@ -94,7 +56,7 @@ export function Patient() {
       <PatientData>
         <Title>Histórico do Paciente</Title>
         <FlatList
-          data={data}
+          data={history}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <HistoryItem date={item.date} tag={item.procedure} />

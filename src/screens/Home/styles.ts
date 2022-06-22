@@ -8,7 +8,7 @@ export const Container = styled.View`
 `;
 
 export const Header = styled.View`
-  margin-top: ${getStatusBarHeight() + 33}px;
+  margin-top: ${getStatusBarHeight() + 20}px;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;

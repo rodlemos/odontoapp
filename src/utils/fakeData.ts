@@ -64,4 +64,37 @@ const appointments = [
   },
 ];
 
-export { appointments };
+const history = [
+  {
+    id: "1",
+    date: "12/06/2021",
+    procedure: "Cirurgia",
+  },
+  {
+    id: "2",
+    date: "27/08/2021",
+    procedure: "Limpeza",
+  },
+  {
+    id: "3",
+    date: "06/09/2021",
+    procedure: "Clareamento",
+  },
+  {
+    id: "4",
+    date: "13/09/2021",
+    procedure: "Clareamento",
+  },
+  {
+    id: "5",
+    date: "24/09/2021",
+    procedure: "Clareamento",
+  },
+  {
+    id: "6",
+    date: "15/03/2022",
+    procedure: "Limpeza",
+  },
+];
+
+export { appointments, history };

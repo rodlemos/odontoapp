@@ -1,4 +1,5 @@
 import { LinearGradient } from "expo-linear-gradient";
+import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import styled from "styled-components/native";
 
 export const Container = styled.View`
@@ -11,7 +12,7 @@ export const Header = styled(LinearGradient).attrs(({ theme }) => ({
   start: { x: 0, y: 1 },
   end: { x: 0.5, y: 0.5 },
 }))`
-  height: 300px;
+  padding-top: ${getStatusBarHeight() + 10}px;
   border-bottom-left-radius: 30px;
   border-bottom-right-radius: 30px;
   justify-content: center;
@@ -26,17 +27,13 @@ export const Buttons = styled.View`
 
 export const PatientInfo = styled.View`
   align-items: center;
-`;
-
-export const Photo = styled.Image`
-  width: 120px;
-  height: 120px;
-  border-radius: 60px;
+  padding-bottom: 30px;
 `;
 
 export const Name = styled.Text`
+  text-align: center;
   margin-top: 10px;
-  font-size: 26px;
+  font-size: 30px;
   font-family: ${({ theme }) => theme.fonts.bold};
   color: #f8f7ff;
 `;
@@ -45,7 +42,7 @@ export const Age = styled.Text`
   padding: 4px 8px;
   border-radius: 20px;
   background-color: ${({ theme }) => theme.colors.background};
-  margin-top: 10px;
+  margin-top: 5px;
   font-size: 18px;
   font-family: ${({ theme }) => theme.fonts.regular};
   color: ${({ theme }) => theme.colors.detail};
@@ -57,14 +54,13 @@ export const PatientData = styled.View`
   background-color: ${({ theme }) => theme.colors.shape};
   border-radius: 16px;
   padding: 10px;
-  flex: 1;
 `;
 
 export const Title = styled.Text`
   font-size: 22px;
   font-family: ${({ theme }) => theme.fonts.bold};
   color: ${({ theme }) => theme.colors.text};
-  margin-bottom: 10px;
+  margin-bottom: 4px;
 `;
 
 export const Summary = styled.View`
@@ -82,7 +78,7 @@ export const NextAppointment = styled.View`
 
 export const Date = styled.Text`
   font-family: ${({ theme }) => theme.fonts.regular};
-  font-size: 18px;
+  font-size: 16px;
 `;
 
 export const Hour = styled.Text`
@@ -90,7 +86,7 @@ export const Hour = styled.Text`
   padding: 2px 8px;
   border-radius: 60px;
   font-family: ${({ theme }) => theme.fonts.regular};
-  font-size: 18px;
+  font-size: 16px;
   background-color: ${({ theme }) => theme.colors.primary_dark};
   color: ${({ theme }) => theme.colors.text_light};
 `;

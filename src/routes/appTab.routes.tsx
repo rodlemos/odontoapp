@@ -4,6 +4,7 @@ import { useTheme } from "styled-components/native";
 import { Platform } from "react-native";
 import { MaterialCommunityIcons, Ionicons, Feather } from "@expo/vector-icons";
 import { Home } from "../screens/Home";
+import { Patient } from "../screens/Patient";
 
 export function AppTabRoutes() {
   const { colors } = useTheme();
@@ -18,7 +19,7 @@ export function AppTabRoutes() {
         tabBarShowLabel: false,
         tabBarStyle: {
           position: "absolute",
-          height: 80,
+          height: 60,
           paddingVertical: Platform.OS === "ios" ? 20 : 0,
           borderTopLeftRadius: 32,
           borderTopRightRadius: 32,
@@ -29,7 +30,7 @@ export function AppTabRoutes() {
       }}
     >
       <Screen
-        name="calendar"
+        name="Calendar"
         component={Home}
         options={{
           tabBarIcon: ({ color }) => (
@@ -42,8 +43,8 @@ export function AppTabRoutes() {
         }}
       />
       <Screen
-        name="home"
-        component={Home}
+        name="Patient"
+        component={Patient}
         options={{
           tabBarIcon: ({ color }) => (
             <Feather name="users" size={40} color={color} />
@@ -51,7 +52,7 @@ export function AppTabRoutes() {
         }}
       />
       <Screen
-        name="notifications"
+        name="Notifications"
         component={Home}
         options={{
           tabBarIcon: ({ color }) => (
