@@ -1,12 +1,14 @@
 import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 import { getDate } from "date-fns";
 import { StatusBar } from "expo-status-bar";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { InteractionManager } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import { useNavigation } from "@react-navigation/native";
 import { AppointmentCard } from "../../components/AppointmentCard";
 import { DateCard } from "../../components/DateCard";
-import { getDayName, getDayDate, getWeekDays } from "../../utils/date-fns";
+import { getDayDate, getDayName, getWeekDays } from "../../utils/date-fns";
+import { appointments } from "../../utils/fakeData";
 import {
   Avatar,
   Container,
@@ -17,7 +19,6 @@ import {
   Header,
   WeekdaysMenu,
 } from "./styles";
-import { appointments } from "../../utils/fakeData";
 
 export function Home() {
   const [today, setToday] = useState("");
@@ -25,6 +26,7 @@ export function Home() {
   const [weekDays, setWeekDays] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
 
+  const scrollRef = useRef(null);
   const { navigate } = useNavigation();
 
   function handleDaySelect(date: Date) {
@@ -33,7 +35,6 @@ export function Home() {
 
   function handleOpenAppointment(appointment) {
     navigate("Patient", { appointment });
-    // console.log(appointment);
   }
 
   useEffect(() => {
@@ -41,7 +42,6 @@ export function Home() {
     setTodayName(getDayName(new Date(), true));
     setWeekDays(getWeekDays());
     setSelectedDate(today);
-    console.log(appointments);
   }, [today]);
 
   return (
@@ -59,14 +59,20 @@ export function Home() {
         <AntDesign name="logout" size={30} />
       </Header>
 
-      <WeekdaysMenu>
-        {weekDays.map((item) => (
+      <WeekdaysMenu
+        ref={scrollRef}
+        onLayout={() => {
+          scrollRef.current.scrollTo({ x: 455, y: 0, animated: false });
+        }}
+      >
+        {weekDays?.map((item) => (
           <DateCard
             key={item}
             number={String(getDate(item))}
             title={getDayName(item)}
             active={getDayDate(item) === selectedDate}
             onPress={() => handleDaySelect(item)}
+            itemKey={item}
           />
         ))}
       </WeekdaysMenu>

@@ -9,7 +9,7 @@ import {
 import ptBR from "date-fns/locale/pt-BR";
 
 function getDayDate(date: Date) {
-  return format(date, "dd/MM/yyyy");
+  return format(date, "dd/MM/yyyy", { locale: ptBR });
 }
 
 function getWeekDays() {

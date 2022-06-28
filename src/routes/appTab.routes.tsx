@@ -1,10 +1,10 @@
-import React from "react";
+import { Feather, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { useTheme } from "styled-components/native";
+import React from "react";
 import { Platform } from "react-native";
-import { MaterialCommunityIcons, Ionicons, Feather } from "@expo/vector-icons";
+import { useTheme } from "styled-components/native";
 import { Home } from "../screens/Home";
-import { Patient } from "../screens/Patient";
+import { Notifications } from "../screens/Notifications";
 
 export function AppTabRoutes() {
   const { colors } = useTheme();
@@ -47,13 +47,13 @@ export function AppTabRoutes() {
         component={Home}
         options={{
           tabBarIcon: ({ color }) => (
-            <Feather name="users" size={40} color={color} />
+            <Feather name="user" size={40} color={color} />
           ),
         }}
       />
       <Screen
         name="Notifications"
-        component={Home}
+        component={Notifications}
         options={{
           tabBarIcon: ({ color }) => (
             <Ionicons name="notifications-outline" size={30} color={color} />

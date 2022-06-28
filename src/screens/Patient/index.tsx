@@ -27,7 +27,6 @@ export function Patient() {
   const { colors } = useTheme();
   const route = useRoute();
   const { appointment } = route.params;
-  console.log(appointment);
 
   return (
     <Container>

@@ -1,7 +1,7 @@
 const appointments = [
   {
     id: "1",
-    date: new Date("06/21/2022"),
+    date: new Date("06/28/2022"),
     hour: "08:30",
     patient: "Renan Lima",
     avatar:
@@ -10,7 +10,7 @@ const appointments = [
   },
   {
     id: "2",
-    date: new Date("06/21/2022"),
+    date: new Date("06/28/2022"),
     hour: "09:00",
     patient: "Franciele M.",
     avatar:
@@ -19,7 +19,7 @@ const appointments = [
   },
   {
     id: "3",
-    date: new Date("06/21/2022"),
+    date: new Date("06/28/2022"),
     hour: "09:30",
     patient: "Amanda Souza",
     avatar:
@@ -28,7 +28,7 @@ const appointments = [
   },
   {
     id: "4",
-    date: new Date("06/21/2022"),
+    date: new Date("06/28/2022"),
     hour: "16:30",
     patient: "Henrique Martins",
     avatar:
@@ -37,7 +37,7 @@ const appointments = [
   },
   {
     id: "5",
-    date: new Date("06/22/2022"),
+    date: new Date("06/29/2022"),
     hour: "08:30",
     patient: "João Pereira",
     avatar:
@@ -46,7 +46,7 @@ const appointments = [
   },
   {
     id: "6",
-    date: new Date("06/22/2022"),
+    date: new Date("06/29/2022"),
     hour: "11:00",
     patient: "Suzana Andrade",
     avatar:
@@ -55,7 +55,7 @@ const appointments = [
   },
   {
     id: "7",
-    date: new Date("06/22/2022"),
+    date: new Date("06/29/2022"),
     hour: "14:30",
     patient: "Marcelo Silva",
     avatar:
