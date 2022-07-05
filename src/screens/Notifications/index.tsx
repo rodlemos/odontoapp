@@ -4,14 +4,22 @@ import { FlatList } from "react-native-gesture-handler";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import { useTheme } from "styled-components";
 import { NotificationCard } from "../../components/NotificationCard";
-import { Container } from "./styles";
+import { notifications } from "../../utils/fakeData";
 
 export function Notifications() {
   const { colors } = useTheme();
+
   return (
     <FlatList
-      data={[1, 2, 3]}
-      renderItem={() => <NotificationCard />}
+      data={notifications}
+      keyExtractor={(item) => item.id}
+      renderItem={({ item }) => (
+        <NotificationCard
+          date={item.date}
+          message={item.message}
+          title={item.title}
+        />
+      )}
       style={{ backgroundColor: colors.background }}
       contentContainerStyle={{
         paddingTop: getStatusBarHeight() + 15,

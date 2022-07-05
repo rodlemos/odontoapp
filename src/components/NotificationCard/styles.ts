@@ -8,6 +8,13 @@ export const Container = styled.View`
   margin-vertical: 5px;
 `;
 
+export const Title = styled.Text`
+  font-size: 16px;
+  font-family: ${({ theme }) => theme.fonts.bold};
+  color: ${({ theme }) => theme.colors.text};
+  margin-bottom: 5px;
+`;
+
 export const Message = styled.Text`
   font-family: ${({ theme }) => theme.fonts.regular};
   color: ${({ theme }) => theme.colors.text};

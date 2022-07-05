@@ -1,13 +1,17 @@
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import { getDate } from "date-fns";
+import { getDate, getDay } from "date-fns";
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useRef, useState } from "react";
-import { InteractionManager } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { AppointmentCard } from "../../components/AppointmentCard";
 import { DateCard } from "../../components/DateCard";
-import { getDayDate, getDayName, getWeekDays } from "../../utils/date-fns";
+import {
+  formatDateToDayFirst,
+  getDayDate,
+  getDayName,
+  getWeekDays,
+} from "../../utils/date-fns";
 import { appointments } from "../../utils/fakeData";
 import {
   Avatar,
@@ -21,10 +25,9 @@ import {
 } from "./styles";
 
 export function Home() {
-  const [today, setToday] = useState("");
   const [todayName, setTodayName] = useState("");
   const [weekDays, setWeekDays] = useState([]);
-  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedDate, setSelectedDate] = useState(getDayDate(new Date()));
 
   const scrollRef = useRef(null);
   const { navigate } = useNavigation();
@@ -38,11 +41,11 @@ export function Home() {
   }
 
   useEffect(() => {
-    setToday(getDayDate(new Date()));
-    setTodayName(getDayName(new Date(), true));
+    const todayDate = new Date();
+
+    setTodayName(getDayName(todayDate, true));
     setWeekDays(getWeekDays());
-    setSelectedDate(today);
-  }, [today]);
+  }, []);
 
   return (
     <Container>
@@ -51,7 +54,9 @@ export function Home() {
         <Greeting>
           <Avatar source={{ uri: "https://github.com/rodlemos.png" }} />
           <GreetingContent>
-            <GreetingDate>{`${todayName}, ${today}`}</GreetingDate>
+            <GreetingDate>{`${todayName}, ${formatDateToDayFirst(
+              new Date()
+            )}`}</GreetingDate>
             <GreetingText>Olá, Rodrigo.</GreetingText>
           </GreetingContent>
         </Greeting>
@@ -62,7 +67,11 @@ export function Home() {
       <WeekdaysMenu
         ref={scrollRef}
         onLayout={() => {
-          scrollRef.current.scrollTo({ x: 455, y: 0, animated: false });
+          const todayWeekDay = getDay(new Date());
+
+          if (todayWeekDay === 0 || todayWeekDay >= 4) {
+            scrollRef.current.scrollTo({ x: 455, y: 0, animated: false });
+          }
         }}
       >
         {weekDays?.map((item) => (
@@ -81,7 +90,7 @@ export function Home() {
         data={appointments}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) =>
-          getDayDate(item.date) === selectedDate && (
+          item.date === selectedDate && (
             <AppointmentCard
               hour={item.hour}
               patient={item.patient}

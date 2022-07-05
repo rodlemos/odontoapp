@@ -1,14 +1,11 @@
-import {
-  eachDayOfInterval,
-  endOfWeek,
-  format,
-  getDate,
-  getDay,
-  startOfWeek,
-} from "date-fns";
+import { eachDayOfInterval, endOfWeek, format, startOfWeek } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
 
 function getDayDate(date: Date) {
+  return format(date, "MM/dd/yyyy");
+}
+
+function formatDateToDayFirst(date: Date) {
   return format(date, "dd/MM/yyyy", { locale: ptBR });
 }
 
@@ -34,4 +31,4 @@ function getDayName(date: Date, fullname = false) {
   return dayName.charAt(0).toUpperCase() + dayName.slice(1);
 }
 
-export { getDayDate, getWeekDays, getDayName };
+export { formatDateToDayFirst, getDayDate, getWeekDays, getDayName };
